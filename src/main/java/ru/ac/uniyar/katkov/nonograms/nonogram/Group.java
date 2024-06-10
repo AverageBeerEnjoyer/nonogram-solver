@@ -8,11 +8,30 @@ public class Group {
     private int lowerBound, upperBound;
     private int curPlacement;
     private final int sequenceNumber;
+    private boolean equalColorLeft = false;
+    private boolean equalColorRight = false;
+
 
     public Group(int sequenceNumber, int length, ConsoleColor color) {
         this.sequenceNumber = sequenceNumber;
         this.length = length;
         this.color = color;
+    }
+
+    protected void setEqualColorLeft(boolean equalColorLeft){
+        this.equalColorLeft = equalColorLeft;
+    }
+
+    protected void setEqualColorRight(boolean equalColorRight) {
+        this.equalColorRight = equalColorRight;
+    }
+
+    public boolean isEqualColorLeft() {
+        return equalColorLeft;
+    }
+
+    public boolean isEqualColorRight() {
+        return equalColorRight;
     }
 
     public ConsoleColor getColor() {

@@ -16,10 +16,26 @@ public class Line {
         this.length = length;
         this.groups = groups;
         this.num = num;
+        setGroupsColorIndicators();
         this.emptyNum = countAcceptableEmptyCells();
         countBounds();
         cells = new ArrayList<>(length);
         this.isRow = isRow;
+    }
+
+    private void setGroupsColorIndicators(){
+        for(int i=0;i<groups.size()-1;++i){
+            Group cur = groups.get(i);
+            Group next = groups.get(i+1);
+            if(cur.getColor() == next.getColor()){
+                cur.setEqualColorRight(true);
+                next.setEqualColorLeft(true);
+            }
+        }
+    }
+
+    public boolean isRow() {
+        return isRow;
     }
 
     public ArrayList<Cell> getCells() {
@@ -105,16 +121,6 @@ public class Line {
             else sb.append(cell.getColor());
         }
         return sb.toString();
-    }
-
-    public boolean hasSimilarColorWithNextGroup(int group) {
-        if (group < 0 || group > groups.size() - 2) return false;
-        return groups.get(group).getColor() == groups.get(group + 1).getColor();
-    }
-
-    public boolean hasSimilarColorWithPrevGroup(int group) {
-        if (group < 1 || group > groups.size() - 1) return false;
-        return groups.get(group).getColor() == groups.get(group - 1).getColor();
     }
 
     public List<Integer> recountColors() {

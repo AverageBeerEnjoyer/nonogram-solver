@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Parser {
 
-    public static Nonogram parseOlsaksFile(File file) {
+    public static Nonogram parseOlsakFile(File file) {
         Scanner scanner;
         try {
             scanner = new Scanner(file);
@@ -39,10 +39,10 @@ public class Parser {
         while (scanner.hasNext()) {
             String s = scanner.nextLine();
             if(s.startsWith(":")) break;
-            rowGroups.add(scanLines(s, colors));
+            rowGroups.add(createGroups(s, colors));
         }
         while (scanner.hasNextLine()) {
-            colGroups.add(scanLines(scanner.nextLine(), colors));
+            colGroups.add(createGroups(scanner.nextLine(), colors));
         }
         for(int i=0;i< rowGroups.size();++i){
             Line line = new Line(colGroups.size(), i, rowGroups.get(i), true);
@@ -55,7 +55,7 @@ public class Parser {
         return new Nonogram(rows,cols, colors.values().stream().toList());
     }
 
-    private static ArrayList<Group> scanLines(String s, HashMap<String, ConsoleColor> colors) {
+    private static ArrayList<Group> createGroups(String s, HashMap<String, ConsoleColor> colors) {
         String[] split = s.split(" ");
         ArrayList<Group> groups = new ArrayList<>();
         if(split[0].isEmpty()) return groups;

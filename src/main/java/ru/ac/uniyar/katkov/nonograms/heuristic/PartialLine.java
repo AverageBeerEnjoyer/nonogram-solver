@@ -4,6 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PartialLine {
-    private List<PartialGroup> groups = new ArrayList<>();
+    private List<LineSegment> groups = new ArrayList<>();
 
 }

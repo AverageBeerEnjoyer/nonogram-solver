@@ -134,7 +134,7 @@ public class BacktrackingSolver {
                     nextLine = row;
                     nextGroup = groupNum + 1;
                     nextStartPos = group.getCurPlacement() + group.getLength();
-                    if (row.hasSimilarColorWithNextGroup(groupNum)) ++nextStartPos;
+                    if (row.getGroups().get(groupNum).isEqualColorRight()) ++nextStartPos;
                 } else {
                     nextLine = nng.getRows().get(row.getNum() + 1);
                     nextGroup = 0;

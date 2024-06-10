@@ -1,12 +1,7 @@
 package ru.ac.uniyar.katkov.nonograms.nonogram;
 
-import ru.ac.uniyar.katkov.nonograms.heuristic.PartialGroup;
-import ru.ac.uniyar.katkov.nonograms.nonogram.Cell;
-import ru.ac.uniyar.katkov.nonograms.nonogram.Line;
 import ru.ac.uniyar.katkov.nonograms.utils.ConsoleColor;
 
-import java.lang.ref.Cleaner;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

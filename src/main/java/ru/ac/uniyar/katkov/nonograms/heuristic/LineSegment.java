@@ -3,10 +3,9 @@ package ru.ac.uniyar.katkov.nonograms.heuristic;
 import ru.ac.uniyar.katkov.nonograms.nonogram.Group;
 import ru.ac.uniyar.katkov.nonograms.utils.ConsoleColor;
 
-import javax.swing.plaf.basic.BasicGraphicsUtils;
 import java.util.*;
 
-public class PartialGroup {
+public class LineSegment {
     private int start;
     private int end;
     private int length;
@@ -14,7 +13,7 @@ public class PartialGroup {
     private TreeSet<Group> owners;
     private boolean completed;
 
-    public PartialGroup(int start, int end, ConsoleColor color) {
+    public LineSegment(int start, int end, ConsoleColor color) {
         this.start = start;
         this.end = end;
         this.length = end - start;
@@ -51,11 +50,11 @@ public class PartialGroup {
         return opt.get().getLength();
     }
 
-    private boolean canBeOwnedBy(Group group) {
+    public boolean canBeOwnedBy(Group group) {
         return isInRange(group) && end - start <= group.getLength() && color == group.getColor();
     }
 
-    public boolean isInRange(Group group){
+    public boolean isInRange(Group group) {
         return start >= group.getLowerBound() && end <= group.getUpperBound();
     }
 
@@ -74,8 +73,14 @@ public class PartialGroup {
         return owners;
     }
 
-    public PartialGroup union(PartialGroup partialGroup) {
-        if (color != partialGroup.color) throw new IllegalArgumentException("groups have different colors");
-        return new PartialGroup(Math.min(start, partialGroup.start), Math.max(end, partialGroup.end), color);
+    public LineSegment union(LineSegment lineSegment) {
+        if (color != lineSegment.color) throw new IllegalArgumentException("groups have different colors");
+        return new LineSegment(Math.min(start, lineSegment.start), Math.max(end, lineSegment.end), color);
+    }
+
+    public boolean canContainGroup(Group group) {
+        int rangeStart = Math.max(group.getLowerBound(), start);
+        int rangeEnd = Math.min(group.getUpperBound(), end);
+        return rangeEnd - rangeStart >= group.getLength();
     }
 }

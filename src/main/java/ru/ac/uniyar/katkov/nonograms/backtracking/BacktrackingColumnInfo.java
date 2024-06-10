@@ -82,7 +82,7 @@ public class BacktrackingColumnInfo {
                 return true;
             }
             if (curGroupSize != groupSize) return false;
-            if (!col.hasSimilarColorWithNextGroup(curGroupNum)) {
+            if (!col.getGroups().get(curGroupNum).isEqualColorRight()) {
                 if (curEmptyCellsNum >= col.getEmptyNum()) return false;
                 increaseEmptyCellsNum();
             }
@@ -117,7 +117,7 @@ public class BacktrackingColumnInfo {
                 decreaseEmptyCellsNum();
                 return;
             }
-            if (!col.hasSimilarColorWithNextGroup(curGroupNum - 1)) {
+            if (!col.getGroups().get(curGroupNum).isEqualColorLeft()) {
                 decreaseEmptyCellsNum();
             }
             decreaseGroupNum();
