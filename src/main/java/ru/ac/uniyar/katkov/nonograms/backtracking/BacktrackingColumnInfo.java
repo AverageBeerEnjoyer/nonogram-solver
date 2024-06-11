@@ -104,8 +104,8 @@ public class BacktrackingColumnInfo {
         return true;
     }
 
-    private void print() {
-        if(col.getNum() != 0) return;
+    public void print() {
+        System.out.println(col);
         System.out.println(curGroupNum + " " + curGroupSize + " " + curEmptyCellsNum);
     }
 
@@ -117,7 +117,7 @@ public class BacktrackingColumnInfo {
                 decreaseEmptyCellsNum();
                 return;
             }
-            if (!col.getGroups().get(curGroupNum).isEqualColorLeft()) {
+            if (!isThereGroups() || !col.getGroups().get(curGroupNum).isEqualColorLeft()) {
                 decreaseEmptyCellsNum();
             }
             decreaseGroupNum();
